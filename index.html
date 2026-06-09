@@ -1,1 +1,557 @@
-# Portfolio2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sreehari S — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0D0F14;
+      --surface:  #161A23;
+      --border:   #252B38;
+      --accent:   #5B8DEF;
+      --accent2:  #9B6DFF;
+      --text:     #E8EBF0;
+      --muted:    #7A8499;
+      --white:    #FFFFFF;
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6vw;
+      background: rgba(13,15,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.9rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--white);
+      border: none; border-radius: 8px;
+      padding: 9px 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: #4a7de0; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 6vw 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(91,141,239,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: 10%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(155,109,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 750px; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(91,141,239,0.12);
+      border: 1px solid rgba(91,141,239,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.6rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--white); border: none; border-radius: 10px;
+      padding: 14px 28px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 28px;
+      font-size: 1rem; font-weight: 500;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 6vw; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-desc { color: var(--muted); max-width: 500px; font-size: 1rem; margin-bottom: 56px; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--surface); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-icon { font-size: 2rem; margin-bottom: 14px; }
+    .skill-card h3 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag {
+      background: rgba(91,141,239,0.1); border: 1px solid rgba(91,141,239,0.2);
+      color: var(--accent); border-radius: 6px;
+      padding: 3px 10px; font-size: 0.78rem; font-weight: 500;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover { border-color: var(--accent2); transform: translateY(-4px); }
+    .project-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--accent2); letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .project-card h3 { font-size: 1.2rem; font-weight: 600; color: var(--white); margin-bottom: 12px; }
+    .project-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; flex: 1; margin-bottom: 20px; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .stack-tag {
+      background: rgba(155,109,255,0.1); border: 1px solid rgba(155,109,255,0.2);
+      color: var(--accent2); border-radius: 6px;
+      padding: 3px 10px; font-size: 0.78rem;
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--accent); font-size: 0.9rem; font-weight: 500;
+      text-decoration: none; transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 10px; }
+
+    /* ── INTERNSHIP ── */
+    #internship { background: var(--surface); }
+    .timeline { display: flex; flex-direction: column; gap: 0; max-width: 720px; }
+    .timeline-item {
+      display: grid; grid-template-columns: 24px 1fr;
+      gap: 0 24px; position: relative;
+    }
+    .timeline-item:not(:last-child) .dot::after {
+      content: '';
+      position: absolute; left: 11px; top: 24px;
+      width: 2px; height: calc(100% - 8px);
+      background: var(--border);
+    }
+    .dot {
+      width: 24px; height: 24px; flex-shrink: 0;
+      background: var(--accent); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; margin-top: 4px;
+      box-shadow: 0 0 0 4px rgba(91,141,239,0.15);
+    }
+    .dot::before { content: '✓'; font-size: 0.65rem; color: var(--white); font-weight: 700; }
+    .timeline-content { padding-bottom: 36px; }
+    .timeline-content h3 { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .timeline-content p { color: var(--muted); font-size: 0.9rem; }
+    .outcome-chip {
+      display: inline-block;
+      background: rgba(91,141,239,0.1); border: 1px solid rgba(91,141,239,0.25);
+      color: var(--accent); border-radius: 6px;
+      padding: 3px 10px; font-size: 0.78rem; margin-top: 10px;
+    }
+
+    /* ── RESUME ── */
+    .resume-wrapper {
+      display: flex; align-items: center; gap: 40px;
+      flex-wrap: wrap;
+    }
+    .resume-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px 40px;
+      flex: 1; min-width: 260px; max-width: 420px;
+    }
+    .resume-card h3 { font-size: 1.1rem; color: var(--white); margin-bottom: 8px; }
+    .resume-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+    .resume-meta { display: flex; flex-direction: column; gap: 16px; }
+    .resume-row { display: flex; justify-content: space-between; font-size: 0.9rem; }
+    .resume-row span:first-child { color: var(--muted); }
+    .resume-row span:last-child { color: var(--white); font-weight: 500; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--surface); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 16px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      text-decoration: none; color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+    .contact-icon { font-size: 1.4rem; width: 40px; text-align: center; }
+    .contact-link-text strong { display: block; font-size: 0.95rem; color: var(--white); }
+    .contact-link-text span { font-size: 0.82rem; color: var(--muted); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form input, .contact-form textarea {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px 16px;
+      color: var(--text); font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form textarea { resize: vertical; min-height: 130px; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 40px 6vw;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.85rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 100px 6vw 60px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .resume-wrapper { flex-direction: column; }
+      section { padding: 64px 6vw; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">sreehari<span>.</span>dev</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#internship">Internship</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+  <div class="hamburger" onclick="this.classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">Available for opportunities</div>
+    <h1>
+      Hi, I'm <span class="gradient">Sreehari S</span><br>
+      BTech CSE Student &amp; Developer
+    </h1>
+    <p class="hero-sub">
+      Second-year Computer Science Engineering student with hands-on experience in software development, hackathons, and AI-focused learning. Passionate about full-stack development, accessibility, and building solutions that matter.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <span class="section-label">What I Work With</span>
+  <h2 class="section-title">Skills &amp; Tools</h2>
+  <p class="section-desc">Technologies I use to design and build products — from UI to backend logic.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">💻</div>
+      <h3>Programming Languages</h3>
+      <p style="color:var(--muted);font-size:0.88rem;">Core languages used for development and problem-solving.</p>
+      <div class="skill-tags">
+        <span class="tag">Java</span><span class="tag">Python</span><span class="tag">C</span><span class="tag">SQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <h3>Web Technologies</h3>
+      <p style="color:var(--muted);font-size:0.88rem;">Building responsive and accessible user interfaces.</p>
+      <div class="skill-tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🧠</div>
+      <h3>Core CS Concepts</h3>
+      <p style="color:var(--muted);font-size:0.88rem;">Strong theoretical foundation in computer science.</p>
+      <div class="skill-tags">
+        <span class="tag">DSA</span><span class="tag">OOP</span><span class="tag">DBMS</span><span class="tag">OS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🛠️</div>
+      <h3>Dev Tools &amp; AI</h3>
+      <p style="color:var(--muted);font-size:0.88rem;">Tools for version control, development, and AI-assisted workflows.</p>
+      <div class="skill-tags">
+        <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">VS Code</span><span class="tag">Claude AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <span class="section-label">What I've Built</span>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-desc">A selection of projects built during my studies and internship.</p>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-number">PROJECT 01 · KAIZEN HACKATHON</div>
+      <h3>Clear Learn</h3>
+      <p>An accessibility-focused learning platform for students with learning disabilities. Features ADHD-friendly and color-blind-friendly interfaces to improve comprehension and retention through structured learning content.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Accessibility</span>
+        <span class="stack-tag">HTML/CSS</span>
+        <span class="stack-tag">JavaScript</span>
+      </div>
+      <a href="#" class="project-link">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">PROJECT 02 · ZYRA HACKATHON</div>
+      <h3>Market Statistics &amp; Analytics Software</h3>
+      <p>A software solution for market analysis and statistics visualization. Processes and organizes business data to assist in data-driven decision-making with a user-friendly information presentation layer.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Data Analysis</span>
+        <span class="stack-tag">SQL</span>
+      </div>
+      <a href="#" class="project-link">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-number">PROJECT 03 · JAVA MINI PROJECT</div>
+      <h3>EventMate</h3>
+      <p>An event management application built in Java with registration and scheduling modules. Applies OOP principles and modular software design for clean, maintainable architecture.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Java</span>
+        <span class="stack-tag">OOP</span>
+        <span class="stack-tag">Modular Design</span>
+      </div>
+      <a href="#" class="project-link">View Project →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- INTERNSHIP -->
+<section id="internship">
+  <span class="section-label">ToMatrix Internship</span>
+  <h2 class="section-title">Internship Work</h2>
+  <p class="section-desc">Key tasks and learnings from my online internship at ToMatrix.</p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="dot"></div>
+      <div class="timeline-content">
+        <h3>Day 1 — [Task Name]</h3>
+        <p>Brief description of what was done and the outcome. Replace with your actual Day 1 deliverable.</p>
+        <span class="outcome-chip">✓ Completed</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="dot"></div>
+      <div class="timeline-content">
+        <h3>Day 2 — [Task Name]</h3>
+        <p>Brief description of what was done and the outcome. Replace with your actual Day 2 deliverable.</p>
+        <span class="outcome-chip">✓ Completed</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="dot"></div>
+      <div class="timeline-content">
+        <h3>Day 3 — [Task Name]</h3>
+        <p>Brief description of what was done and the outcome. Replace with your actual Day 3 deliverable.</p>
+        <span class="outcome-chip">✓ Completed</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="dot"></div>
+      <div class="timeline-content">
+        <h3>Day 4 — Personal Portfolio Generation</h3>
+        <p>Built this fully responsive personal portfolio using AI-assisted development. Deployed via GitHub Pages / Vercel.</p>
+        <span class="outcome-chip">✓ Completed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <span class="section-label">Background</span>
+  <h2 class="section-title">Resume</h2>
+  <p class="section-desc">A snapshot of my education, internship, and skills.</p>
+  <div class="resume-wrapper">
+    <div class="resume-card">
+      <h3>Education</h3>
+      <p style="color:var(--muted);font-size:0.88rem;margin-bottom:16px;">Current academic details</p>
+      <div class="resume-meta">
+        <div class="resume-row"><span>Degree</span><span>B.Tech — Computer Science & Engineering</span></div>
+        <div class="resume-row"><span>College</span><span>College of Engineering Perumon</span></div>
+        <div class="resume-row"><span>Year</span><span>2nd Year (2024 – 2028)</span></div>
+        <div class="resume-row"><span>CGPA</span><span>7.56 / 10</span></div>
+      </div>
+    </div>
+    <div>
+      <p style="color:var(--muted);margin-bottom:24px;max-width:400px;">Download my full resume as a PDF for a complete overview of my experience and skills.</p>
+      <a href="#" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+        ⬇ Download Resume (PDF)
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="section-label">Let's Connect</span>
+  <h2 class="section-title">Contact Me</h2>
+  <p class="section-desc">Open to internships, collaborations, and full-time roles after graduation.</p>
+  <div class="contact-grid">
+    <div class="contact-links">
+      <a href="mailto:sreeharisree814@gmail.com" class="contact-link">
+        <div class="contact-icon">📧</div>
+        <div class="contact-link-text">
+          <strong>Email</strong>
+          <span>sreeharisree814@gmail.com</span>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/sreehari-s" target="_blank" class="contact-link">
+        <div class="contact-icon">🔗</div>
+        <div class="contact-link-text">
+          <strong>LinkedIn</strong>
+          <span>linkedin.com/in/sreehari-s</span>
+        </div>
+      </a>
+      <a href="https://github.com/sreehari-s" target="_blank" class="contact-link">
+        <div class="contact-icon">🐙</div>
+        <div class="contact-link-text">
+          <strong>GitHub</strong>
+          <span>github.com/sreehari-s</span>
+        </div>
+      </a>
+      <a href="tel:9947981798" class="contact-link">
+        <div class="contact-icon">📱</div>
+        <div class="contact-link-text">
+          <strong>Phone</strong>
+          <span>+91 9947981798</span>
+        </div>
+      </a>
+    </div>
+    <div class="contact-form">
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Your Email" />
+      <textarea placeholder="Your message..."></textarea>
+      <button class="btn-primary" onclick="alert('Message sent! (Connect this to a form service like Formspree)')">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built with ❤️ and AI tools · <a href="https://github.com/sreehari-s">Source on GitHub</a> · © 2025 Sreehari S</p>
+</footer>
+
+</body>
+</html>
